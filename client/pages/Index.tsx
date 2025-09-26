@@ -6,15 +6,19 @@ import { ImageGallery } from "@/components/ui/ImageGallery";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 
 const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
-  <div className="group relative bg-card/50 backdrop-blur-sm p-6 rounded-xl border border-border/40 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
-    <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+  <div className="group relative card-elevated dark:bg-card/80 dark:border-border/40 hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-primary/5 p-6 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02]">
+    {/* Light mode: Gradient overlay on hover */}
+    <div className="absolute inset-0 rounded-xl bg-gradient-accent-light opacity-0 group-hover:opacity-100 transition-opacity duration-300 dark:bg-gradient-to-br dark:from-primary/5 dark:to-transparent" />
+    {/* Floating animation for icon */}
     <div className="relative z-10">
-      <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4">
-        <Icon className="h-5 w-5" />
+      <div className="h-12 w-12 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center text-primary mb-4 group-hover:animate-pulse transition-all duration-300 group-hover:bg-primary/20 dark:group-hover:bg-primary/30">
+        <Icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
       </div>
-      <h3 className="text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-muted-foreground text-sm">{description}</p>
+      <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors duration-300">{title}</h3>
+      <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
     </div>
+    {/* Shimmer effect on hover - different for light/dark */}
+    <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-transparent via-white/10 dark:via-white/5 to-transparent bg-[length:200%_100%] animate-shimmer" />
   </div>
 );
 
@@ -92,9 +96,16 @@ export default function Index() {
       {/* Hero */}
       <section className="relative py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(0deg,rgba(0,0,0,0.8),rgba(0,0,0,0))]"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(239,68,68,0.18),transparent_70%)]"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-background/80 to-background"></div>
+          {/* Light mode: Beautiful mesh gradient background */}
+          <div className="absolute inset-0 bg-mesh-gradient"></div>
+          {/* Light mode: Subtle dot pattern overlay */}
+          <div className="absolute inset-0 bg-pattern-dots"></div>
+          {/* Light mode gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-hero-light"></div>
+          
+          {/* Dark mode: Clean minimal background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-background/80 to-background hidden dark:block"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(239,68,68,0.18),transparent_70%)] hidden dark:block"></div>
         </div>
         
         <div className="container relative z-10">
@@ -127,9 +138,15 @@ export default function Index() {
       </section>
 
       {/* Features */}
-      <section className="relative py-20 bg-muted/30">
+      <section className="relative py-20 bg-gradient-light dark:bg-muted/30">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(0deg,rgba(0,0,0,0.1),rgba(0,0,0,0.5))]"></div>
+          {/* Light mode: Diagonal pattern */}
+          <div className="absolute inset-0 bg-pattern-diagonal dark:hidden"></div>
+          {/* Light mode: Subtle grid overlay */}
+          <div className="absolute inset-0 bg-pattern-grid opacity-30 dark:hidden"></div>
+          
+          {/* Dark mode: Clean background */}
+          <div className="absolute inset-0 hidden dark:block"></div>
         </div>
         
         <div className="container relative z-10">
@@ -156,9 +173,12 @@ export default function Index() {
       </section>
 
       {/* Who We Are */}
-      <section className="py-24">
+      <section className="py-24 bg-gradient-light dark:bg-background">
         <div className="container">
-          <div className="bg-card/50 border border-border/40 rounded-2xl p-8 md:p-12 lg:p-16">
+          <div className="glass-effect dark:bg-card/50 dark:border-border/40 rounded-2xl p-8 md:p-12 lg:p-16 relative overflow-hidden">
+            {/* Light mode: Floating background elements */}
+            <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/5 rounded-full blur-3xl dark:hidden"></div>
+            <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-accent/5 rounded-full blur-3xl dark:hidden"></div>
             <div className="max-w-4xl mx-auto">
               <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
                 <div className="md:col-span-5">

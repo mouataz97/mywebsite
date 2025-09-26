@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n-new';
 import { LanguageSwitcher } from './LanguageSwitcher';
@@ -212,38 +213,62 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile menu backdrop */}
-      {isMenuOpen && (
+      {/* Mobile menu portal - renders directly to body */}
+      {typeof window !== 'undefined' && isMenuOpen && createPortal(
         <div 
-          className="fixed inset-0 backdrop-blur-sm transition-all duration-300 ease-in-out opacity-100 visible"
-          style={{ 
-            zIndex: 99999,
-            backgroundColor: theme === 'dark' 
-              ? 'rgba(255, 255, 255, 0.08)' // Light overlay for dark mode - makes content visible
-              : 'rgba(0, 0, 0, 0.15)' // Dark overlay for light mode
+          className="mobile-menu-overlay"
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 999999,
+            pointerEvents: 'auto'
           }}
-          role="dialog" 
-          aria-modal="true"
-          aria-hidden="false"
-          aria-labelledby="mobile-menu-title"
-          onClick={(e) => {
-            console.log('Backdrop clicked, closing menu');
-            setIsMenuOpen(false);
-          }}
-        />
-      )}
-      
-      {/* Mobile menu panel */}
-      {isMenuOpen && (
-        <div 
-          id="mobile-menu"
-          className="fixed top-0 right-0 h-screen bg-background border-l border-border/20 shadow-2xl transition-transform duration-300 ease-in-out menu-content translate-x-0"
-          style={{ 
-            zIndex: 100000,
-            width: isArabic ? 'min(85vw, 400px)' : 'min(75vw, 350px)'
-          }}
-          onClick={(e) => e.stopPropagation()}
         >
+          {/* Mobile menu backdrop */}
+          <div 
+            className="backdrop-blur-sm"
+            style={{ 
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              width: '100vw',
+              height: '100vh',
+              backgroundColor: theme === 'dark' 
+                ? 'rgba(255, 255, 255, 0.08)' 
+                : 'rgba(0, 0, 0, 0.15)'
+            }}
+            role="dialog" 
+            aria-modal="true"
+            aria-hidden="false"
+            aria-labelledby="mobile-menu-title"
+            onClick={(e) => {
+              console.log('Backdrop clicked, closing menu');
+              setIsMenuOpen(false);
+            }}
+          />
+          
+          {/* Mobile menu panel */}
+          <div 
+            id="mobile-menu"
+            className={`bg-background border-l border-border/20 shadow-2xl transition-transform duration-300 ease-in-out ${
+              isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+            }`}
+            style={{ 
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              bottom: 0,
+              width: isArabic ? 'min(85vw, 400px)' : 'min(75vw, 350px)',
+              height: '100vh',
+              zIndex: 1000000
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="h-full overflow-y-auto flex flex-col">
               {/* Header with theme toggle and close button */}
               <div className="flex items-center justify-between p-4 border-b border-border/20">
@@ -297,7 +322,9 @@ export function Header() {
                 </div>
               </div>
             </div>
-        </div>
+          </div>
+        </div>,
+        document.body
       )}
     </header>
   );
