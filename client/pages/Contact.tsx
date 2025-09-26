@@ -6,10 +6,12 @@ import { Loader2, Mail, MapPin, Phone } from "lucide-react";
 
 export default function Contact() {
   const [searchParams] = useSearchParams();
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  
+  const isArabic = locale === 'ar';
 
   const subjectParam = (searchParams.get("subject") || searchParams.get("service") || "").toLowerCase();
   
@@ -66,11 +68,11 @@ export default function Contact() {
   return (
     <main className="min-h-[calc(100vh-200px)]">
       <section className="container py-8 sm:py-12 md:py-16">
-        <div className="text-center mb-10 md:mb-16">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+        <div className="text-center mb-10 md:mb-16" dir="auto">
+          <h1 className={`font-semibold tracking-tight bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent ${isArabic ? 'text-2xl sm:text-3xl md:text-4xl' : 'text-3xl sm:text-4xl md:text-5xl'}`}>
             {t("contact.title")}
           </h1>
-          <p className="mt-3 sm:mt-4 max-w-2xl mx-auto text-muted-foreground">
+          <p className={`mt-3 sm:mt-4 mx-auto text-muted-foreground ${isArabic ? 'max-w-4xl text-lg sm:text-xl' : 'max-w-2xl'}`}>
             {t("contact.subtitle")}
           </p>
         </div>
@@ -103,8 +105,9 @@ export default function Contact() {
                     type="text"
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-2.5 rounded-lg border border-border bg-background/80 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                    className={`w-full rounded-lg border border-border bg-background/80 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors disabled:opacity-60 disabled:cursor-not-allowed ${isArabic ? 'px-5 py-3 text-right' : 'px-4 py-2.5'}`}
                     placeholder={t("contact.namePlaceholder") || "John Doe"}
+                    dir="auto"
                   />
                 </div>
 
@@ -118,8 +121,9 @@ export default function Contact() {
                     type="email"
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-2.5 rounded-lg border border-border bg-background/80 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                    className={`w-full rounded-lg border border-border bg-background/80 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors disabled:opacity-60 disabled:cursor-not-allowed ${isArabic ? 'px-5 py-3 text-right' : 'px-4 py-2.5'}`}
                     placeholder={t("contact.emailPlaceholder") || "you@company.com"}
+                    dir="auto"
                   />
                 </div>
 
@@ -132,8 +136,9 @@ export default function Contact() {
                     name="company"
                     type="text"
                     disabled={isSubmitting}
-                    className="w-full px-4 py-2.5 rounded-lg border border-border bg-background/80 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                    className={`w-full rounded-lg border border-border bg-background/80 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors disabled:opacity-60 disabled:cursor-not-allowed ${isArabic ? 'px-5 py-3 text-right' : 'px-4 py-2.5'}`}
                     placeholder={t("contact.companyPlaceholder") || "Your company name"}
+                    dir="auto"
                   />
                 </div>
 
@@ -146,7 +151,8 @@ export default function Contact() {
                     name="service"
                     defaultValue={defaultService}
                     disabled={isSubmitting}
-                    className="w-full px-4 py-2.5 rounded-lg border border-border bg-background/80 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors disabled:opacity-60 disabled:cursor-not-allowed appearance-none"
+                    className={`w-full rounded-lg border border-border bg-background/80 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors disabled:opacity-60 disabled:cursor-not-allowed appearance-none ${isArabic ? 'px-5 py-3 text-right' : 'px-4 py-2.5'}`}
+                    dir="auto"
                   >
                     {[
                       t("opt.web"),
@@ -171,23 +177,24 @@ export default function Contact() {
                 <textarea
                   id="message"
                   name="message"
-                  rows={5}
+                  rows={isArabic ? 6 : 5}
                   required
                   disabled={isSubmitting}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-background/80 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                  className={`w-full rounded-lg border border-border bg-background/80 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors disabled:opacity-60 disabled:cursor-not-allowed ${isArabic ? 'px-5 py-4 text-right' : 'px-4 py-3'}`}
                   placeholder={t("contact.messagePlaceholder") || "Tell us about your project..."}
+                  dir="auto"
                 />
               </div>
 
               <div className="pt-2">
                 <Button 
                   type="submit" 
-                  className="w-full sm:w-auto min-w-[160px] h-12 px-6 font-medium rounded-lg transition-all"
+                  className={`w-full sm:w-auto font-medium rounded-lg transition-all ${isArabic ? 'min-w-[200px] h-14 px-8' : 'min-w-[160px] h-12 px-6'}`}
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      <Loader2 className={`h-4 w-4 animate-spin ${isArabic ? 'ml-2' : 'mr-2'}`} />
                       {t("contact.sending")}
                     </>
                   ) : (

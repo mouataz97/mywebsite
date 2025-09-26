@@ -19,8 +19,10 @@ const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: str
 );
 
 export default function Index() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const location = useLocation();
+  
+  const isArabic = locale === 'ar';
   
   const features = [
     {
@@ -96,25 +98,25 @@ export default function Index() {
         </div>
         
         <div className="container relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium leading-5 text-primary ring-1 ring-inset ring-primary/20 mb-6">
+          <div className={`${isArabic ? 'max-w-6xl' : 'max-w-4xl'} mx-auto text-center`} dir="auto">
+            <span className={`inline-flex items-center rounded-full bg-primary/10 text-xs font-medium leading-5 text-primary ring-1 ring-inset ring-primary/20 mb-6 ${isArabic ? 'px-4 py-2' : 'px-3 py-1'}`}>
               {t("home.badge")}
             </span>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
+            <h1 className={`font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70 ${isArabic ? 'text-3xl md:text-5xl lg:text-6xl leading-tight px-4 py-6 md:px-8 md:py-8' : 'text-4xl md:text-6xl lg:text-7xl'}`}>
               {t("home.title")}
             </h1>
-            <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className={`mt-6 text-muted-foreground mx-auto ${isArabic ? 'text-xl md:text-2xl max-w-4xl leading-relaxed' : 'text-lg md:text-xl max-w-2xl'}`}>
               {t("home.sub")}
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="h-12 px-8 text-base">
+              <Button asChild size="lg" className={`text-base ${isArabic ? 'h-14 px-12' : 'h-12 px-8'}`}>
                 <Link to="/contact" state={{ modal: true, backgroundLocation: location }} className="group">
                   {t("home.ctaPrimary")}
-                  <span className="ml-2 opacity-70 group-hover:translate-x-1 transition-transform">→</span>
+                  <span className={`opacity-70 group-hover:translate-x-1 transition-transform ${isArabic ? 'mr-2' : 'ml-2'}`}>→</span>
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="h-12 px-8 text-base">
+              <Button asChild variant="outline" size="lg" className={`text-base ${isArabic ? 'h-14 px-12' : 'h-12 px-8'}`}>
                 <Link to="/services">
                   {t("home.ctaSecondary")}
                 </Link>

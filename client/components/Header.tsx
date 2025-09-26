@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n-new';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { ThemeSwitch } from './ThemeSwitch';
+import { useTheme } from '@/hooks/use-theme';
 
 interface NavLink {
   to: string;
@@ -10,10 +11,13 @@ interface NavLink {
 }
 
 export function Header() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const location = useLocation();
+  const { theme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  
+  const isArabic = locale === 'ar';
   
   // Handle body scroll when mobile menu is open
   useEffect(() => {
@@ -111,13 +115,13 @@ export function Header() {
         className={({ isActive }) =>
           `transition-all duration-300 relative group ${
             isMobile 
-              ? 'flex items-center w-full px-3 py-3 rounded-lg text-base min-h-[48px] touch-manipulation' 
-              : 'inline-block px-4 py-3 rounded-md text-base'
+              ? `flex items-center w-full rounded-lg text-lg min-h-[${isArabic ? '72px' : '64px'}] touch-manipulation font-medium ${isArabic ? 'px-8 py-6' : 'px-6 py-5'}` 
+              : `inline-block rounded-md text-base ${isArabic ? 'px-6 py-4' : 'px-5 py-3'}`
           } ${
             isActive 
               ? 'text-primary font-medium bg-primary/10' 
               : 'text-muted-foreground hover:text-primary hover:bg-accent/10'
-          }`
+          } ${isArabic ? 'text-right' : ''}`
         }
         end={link.to === "/"}
         onClick={() => isMobile && setIsMenuOpen(false)}
@@ -151,13 +155,13 @@ export function Header() {
 
   return (
     <header 
-      className={`sticky top-0 z-50 border-b transition-all duration-300 ${
+      className={`sticky top-0 z-[9998] border-b transition-all duration-300 ${
         scrolled 
           ? 'bg-background/95 backdrop-blur-md border-border/20 shadow-sm' 
           : 'bg-background/80 backdrop-blur-sm border-transparent'
       }`}
     >
-      <div className="container h-16 flex items-center justify-between px-4 sm:px-6">
+      <div className="container h-16 flex items-center justify-between px-4 sm:px-6" dir="auto">
         <Link 
           to="/" 
           className="flex items-center gap-2 group"
@@ -171,10 +175,10 @@ export function Header() {
         </Link>
         
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-2" dir="auto">
           {navLinks.map(link => renderNavLink(link))}
-          <div className="h-6 w-px bg-border/40 mx-2"></div>
-          <div className="flex items-center gap-2 pl-1">
+          <div className="h-6 w-px bg-border/40 mx-3"></div>
+          <div className="flex items-center gap-3 pl-2">
             <LanguageSwitcher />
             <ThemeSwitch />
           </div>
@@ -182,16 +186,26 @@ export function Header() {
         
         {/* Mobile menu button */}
         <button
+          type="button"
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-          className="md:hidden h-12 w-12 flex items-center justify-center rounded-full hover:bg-accent/10 hover:text-primary transition-colors duration-200 touch-manipulation active:scale-95"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-menu"
+          className="md:hidden h-12 w-12 flex items-center justify-center rounded-full hover:bg-accent/10 hover:text-primary transition-colors duration-200 touch-manipulation active:scale-95 relative z-50"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Menu button clicked, toggling from:', isMenuOpen, 'to:', !isMenuOpen);
+            setIsMenuOpen(!isMenuOpen);
+          }}
         >
           {isMenuOpen ? (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5" aria-hidden="true">
+              <title>Close menu</title>
               <path d="M18 6L6 18M6 6l12 12"/>
             </svg>
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5" aria-hidden="true">
+              <title>Open menu</title>
               <path d="M3 6h18M3 12h18M3 18h18"/>
             </svg>
           )}
@@ -199,34 +213,52 @@ export function Header() {
       </div>
 
       {/* Mobile menu backdrop */}
-      <div 
-        className={`fixed inset-0 z-[9999] bg-black/20 backdrop-blur-sm transition-all duration-300 ease-in-out ${
-          isMenuOpen 
-            ? 'opacity-100 visible' 
-            : 'opacity-0 invisible pointer-events-none'
-        }`}
-        role="dialog" 
-        aria-modal="true"
-        aria-hidden={!isMenuOpen}
-        onClick={() => setIsMenuOpen(false)}
-      >
-        {/* Mobile menu panel */}
+      {isMenuOpen && (
         <div 
-          className={`fixed top-0 right-0 h-full w-1/2 min-w-[280px] bg-background border-l border-border/20 shadow-2xl transition-transform duration-300 ease-in-out menu-content ${
-            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
+          className="fixed inset-0 backdrop-blur-sm transition-all duration-300 ease-in-out opacity-100 visible"
+          style={{ 
+            zIndex: 99999,
+            backgroundColor: theme === 'dark' 
+              ? 'rgba(255, 255, 255, 0.08)' // Light overlay for dark mode - makes content visible
+              : 'rgba(0, 0, 0, 0.15)' // Dark overlay for light mode
+          }}
+          role="dialog" 
+          aria-modal="true"
+          aria-hidden="false"
+          aria-labelledby="mobile-menu-title"
+          onClick={(e) => {
+            console.log('Backdrop clicked, closing menu');
+            setIsMenuOpen(false);
+          }}
+        />
+      )}
+      
+      {/* Mobile menu panel */}
+      {isMenuOpen && (
+        <div 
+          id="mobile-menu"
+          className="fixed top-0 right-0 h-screen bg-background border-l border-border/20 shadow-2xl transition-transform duration-300 ease-in-out menu-content translate-x-0"
+          style={{ 
+            zIndex: 100000,
+            width: isArabic ? 'min(85vw, 400px)' : 'min(75vw, 350px)'
+          }}
           onClick={(e) => e.stopPropagation()}
         >
-            <div className="h-full overflow-y-auto">
-              {/* Header with close button */}
+            <div className="h-full overflow-y-auto flex flex-col">
+              {/* Header with theme toggle and close button */}
               <div className="flex items-center justify-between p-4 border-b border-border/20">
-                <span className="text-lg font-semibold tracking-tight">Menu</span>
+                <div className="flex items-center gap-3">
+                  <span id="mobile-menu-title" className="text-lg font-semibold tracking-tight">Menu</span>
+                  <ThemeSwitch />
+                </div>
                 <button
+                  type="button"
                   onClick={() => setIsMenuOpen(false)}
                   className="p-2 hover:bg-accent/10 rounded-full transition-colors"
                   aria-label="Close menu"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <title>Close menu</title>
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                   </svg>
@@ -234,32 +266,39 @@ export function Header() {
               </div>
                 
               {/* Mobile navigation */}
-              <nav className="p-4">
-                <div className="space-y-1">
+              <nav className="flex-1 p-6" role="navigation" aria-label="Mobile menu navigation">
+                <ul className="space-y-3" role="list">
                   {navLinks.map((link) => (
-                    <div key={link.to}>
+                    <li key={link.to} role="listitem">
                       {renderNavLink(link, true)}
-                    </div>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </nav>
               
               {/* Mobile footer */}
-              <div className="p-4 mt-auto border-t border-border/20">
-                <div className="space-y-4">
+              <div className="p-4 border-t border-border/20">
+                <div className="space-y-6">
                   <div className="flex flex-col gap-3">
                     <div className="text-sm font-medium text-muted-foreground">Language</div>
                     <LanguageSwitcher />
                   </div>
-                  <div className="flex flex-col gap-3">
-                    <div className="text-sm font-medium text-muted-foreground">Theme</div>
-                    <ThemeSwitch />
+                  
+                  {/* Company info */}
+                  <div className="pt-4 border-t border-border/10">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="h-6 w-6 rounded-sm bg-gradient-to-br from-primary to-primary/60" aria-hidden="true" />
+                      <span className="text-lg font-semibold tracking-tight">300k.studio</span>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Digital solutions crafted for growth
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }
