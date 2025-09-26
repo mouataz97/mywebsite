@@ -1,0 +1,146 @@
+{
+  "header": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "opt": {
+    "web": "Web",
+    "mobile": "Mobile",
+    "brand": "Branding",
+    "opt": "Optimization",
+    "mkt": "Marketing",
+    "other": "Other"
+  },
+  "home": {
+    "badge": "360° digital agency",
+    "title": "Digital Solutions Crafted for Growth",
+    "sub": "We help businesses transform ideas into scalable digital products — from sleek websites and mobile apps to tailored systems that streamline operations.",
+    "ctaPrimary": "Let's work together",
+    "ctaSecondary": "Explore services"
+  },
+  "who": {
+    "title": "Who We Are",
+    "subtitle": "Crafting Digital Excellence",
+    "copy": "At 300k Studio, we believe technology should adapt to your business — not the other way around. We are a digital partner for ambitious companies, delivering design, development, and marketing that move businesses forward.",
+    "learnMore": "Learn more about us"
+  },
+  "what": {
+    "title": "Digital Transformation for Growth",
+    "copy": "Your business is unique. We create solutions that adapt to your processes, not force you to change them. From intuitive websites and mobile apps to ERP platforms such as Odoo, we ensure every tool works together seamlessly.",
+    "items": {
+      "web": {
+        "title": "Web Development",
+        "desc": "Modern, responsive websites built with the latest technologies."
+      },
+      "mobile": {
+        "title": "Mobile Apps",
+        "desc": "Cross‑platform mobile applications for iOS and Android."
+      },
+      "design": {
+        "title": "UI/UX Design",
+        "desc": "Beautiful, intuitive interfaces that users love."
+      },
+      "strategy": {
+        "title": "Digital Strategy",
+        "desc": "Data‑driven strategies to grow your online presence."
+      }
+    }
+  },
+  "ourServices": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive Digital Solutions"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive Digital Solutions",
+    "hero": "Services",
+    "intro": "We provide end‑to‑end digital solutions tailored to your needs.",
+    "finalCta": "Let’s build something great together",
+    "finalBtn": "Contact us"
+  },
+  "service": {
+    "web": {
+      "title": "Web Development",
+      "desc": "Modern, scalable websites — from simple sites to full platforms."
+    },
+    "mobile": {
+      "title": "Mobile Apps",
+      "desc": "Engaging, user-focused apps that connect you with your audience."
+    },
+    "brand": {
+      "title": "Branding & Design",
+      "desc": "Logos, visuals, and digital identities that tell your story."
+    },
+    "opt": {
+      "title": "Business Optimization",
+      "desc": "Custom systems and automation. Bespoke builds or ERP (Odoo) that align with your goals."
+    },
+    "mkt": {
+      "title": "Marketing & Growth",
+      "desc": "Smart campaigns, social, and SEO that drive visibility and results."
+    },
+    "whatYouGet": "What you get:"
+  },
+  "why": {
+    "title": "Why Choose Us",
+    "subtitle": "Partners in Your Success",
+    "point1": "Agile, fast, and flexible.",
+    "point2": "Tailored solutions for startups and SMEs.",
+    "point3": "Affordable packages that scale with you.",
+    "point4": "Africa-first perspective with global standards.",
+    "partners": "We don't just deliver projects — we build long-term partnerships."
+  },
+  "portfolio": {
+    "title": "Our Portfolio",
+    "subtitle": "Showcasing Our Best Work",
+    "viewAll": "View All Projects",
+    "viewProject": "View Project",
+    "recentTitle": "Our Recent Work",
+    "recentSubtitle": "Check out some of our latest projects and success stories"
+  },
+  "cta": {
+    "banner": {
+      "title": "Ready to bring your vision to life?",
+      "btn": "Start Your Project"
+    }
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Have a project in mind or want to discuss potential opportunities?",
+    "sub": "Let's discuss your project",
+    "name": "Full Name",
+    "namePlaceholder": "What should we call you?",
+    "email": "Email Address",
+    "emailPlaceholder": "Where can we reach you? (e.g., name@example.com)",
+    "company": "Your Organization",
+    "companyPlaceholder": "The awesome company you work with",
+    "service": "How can we assist you today?",
+    "message": "Your Message",
+    "messagePlaceholder": "We're all ears! Share your thoughts, questions, or project details with us...",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Thank you for your message! We will get back to you soon.",
+    "error": "Failed to send message. Please try again later.",
+    "emailUs": "Drop Us a Line",
+    "callUs": "Let's Talk",
+    "callUsCopy": "Available Monday to Friday from 9am to 6pm",
+    "visitUs": "Our Door is Open",
+    "direct": "Direct Contact",
+    "directCopy": "Prefer to reach out directly?",
+    "locations": "Our Locations",
+    "locationsCopy": "We work with clients worldwide. Our main offices are located in Morocco.",
+    "newMessage": "New message from website",
+    "teaser": {
+      "title": "Contact",
+      "copy": "Let's talk about your next big idea.",
+      "btn": "Let's talk"
+    }
+  },
+  "footer": {
+    "copy": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}

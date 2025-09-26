@@ -1,0 +1,163 @@
+/** @import must precede all other statements */
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;600;700;800&family=Cairo:wght@400;600;700&display=swap");
+
+/* Tailwind directives - these are valid and will be processed by Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Color variables */
+    --background: 240 7% 6%;
+    --foreground: 0 0% 100%;
+    --card: 240 6% 10%;
+    --card-foreground: 0 0% 100%;
+    --popover: 240 6% 10%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 84% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 5% 16%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 5% 20%;
+    --muted-foreground: 240 5% 70%;
+    --accent: 0 90% 68%;
+    --accent-foreground: 240 6% 6%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 5% 20%;
+    --input: 240 5% 20%;
+    --ring: 0 84% 60%;
+    --radius: 0.75rem;
+    --sidebar-background: 240 7% 6%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 84% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 0 84% 60%;
+  }
+  
+  /* Base styles */
+  * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+    border-color: hsl(var(--border));
+  }
+  
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    touch-action: manipulation;
+    font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  }
+  
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+    position: relative;
+    width: 100%;
+  }
+  
+  /* RTL support */
+  [dir="rtl"] {
+    font-family: "Cairo", system-ui, -apple-system, sans-serif;
+  }
+  
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.75em;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  h1 { 
+    font-size: 2.25rem;
+    line-height: 1.1;
+  }
+  
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 3.75rem;
+    }
+  }
+  
+  /* Animation keyframes */
+  @keyframes fadeInUp {
+    from { 
+      opacity: 0; 
+      transform: translateY(10px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+  
+  @keyframes slideIn {
+    from { 
+      transform: translateX(-20px); 
+      opacity: 0; 
+    }
+    to { 
+      transform: translateX(0); 
+      opacity: 1; 
+    }
+  }
+  
+  /* Utility classes */
+  .text-glow {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    transition: text-shadow 0.3s ease;
+  }
+  
+  .text-glow:hover {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+  }
+  
+  .hover-scale {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .hover-scale:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Mobile menu */
+  .mobile-menu {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .mobile-menu[aria-hidden="true"] {
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .mobile-menu[aria-hidden="false"] {
+    opacity: 1;
+    visibility: visible;
+  }
+}

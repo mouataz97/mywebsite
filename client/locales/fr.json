@@ -1,0 +1,144 @@
+{
+  "header": {
+    "home": "Accueil",
+    "services": "Services",
+    "about": "À propos",
+    "contact": "Contact"
+  },
+  "home": {
+    "badge": "Agence digitale 360°",
+    "title": "Solutions Numériques pour la Croissance",
+    "sub": "Nous aidons les entreprises à transformer leurs idées en produits numériques évolutifs — des sites web élégants aux applications mobiles, en passant par des systèmes sur mesure qui optimisent les opérations.",
+    "ctaPrimary": "Travaillons ensemble",
+    "ctaSecondary": "Découvrir nos services"
+  },
+  "who": {
+    "title": "Qui Sommes-Nous",
+    "subtitle": "L'Excellence Numérique",
+    "copy": "Chez 300k Studio, nous croyons que la technologie doit s'adapter à votre entreprise — et non l'inverse. Nous sommes le partenaire numérique des entreprises ambitieuses, offrant design, développement et marketing qui font avancer les entreprises.",
+    "learnMore": "En savoir plus sur nous"
+  },
+  "what": {
+    "title": "Transformation Numérique pour la Croissance",
+    "copy": "Votre entreprise est unique. Nous créons des solutions qui s'adaptent à vos processus, sans vous forcer à les changer. Des sites web intuitifs aux applications mobiles en passant par les plateformes ERP comme Odoo, nous veillons à ce que chaque outil fonctionne parfaitement ensemble.",
+    "items": {
+      "web": {
+        "title": "Développement Web",
+        "desc": "Sites web modernes et responsives construits avec les dernières technologies."
+      },
+      "mobile": {
+        "title": "Applications Mobiles",
+        "desc": "Applications mobiles multiplateformes pour iOS et Android."
+      },
+      "design": {
+        "title": "Design UI/UX",
+        "desc": "Des interfaces belles et intuitives que les utilisateurs adorent."
+      },
+      "strategy": {
+        "title": "Stratégie Digitale",
+        "desc": "Des stratégies fondées sur les données pour développer votre présence en ligne."
+      }
+    }
+  },
+  "ourServices": {
+    "title": "Nos Services",
+    "subtitle": "Solutions Numériques Complètes"
+  },
+  "services": {
+    "title": "Nos Services",
+    "subtitle": "Solutions Numériques Complètes",
+    "hero": "Services",
+    "intro": "Nous fournissons des solutions numériques de bout en bout adaptées à vos besoins.",
+    "finalCta": "Construisons quelque chose de grand ensemble",
+    "finalBtn": "Nous contacter"
+  },
+  "service": {
+    "web": {
+      "title": "Développement Web",
+      "desc": "Sites web modernes et évolutifs — des sites simples aux plateformes complètes."
+    },
+    "mobile": {
+      "title": "Applications Mobiles",
+      "desc": "Applications engageantes et centrées sur l'utilisateur qui vous connectent à votre public."
+    },
+    "brand": {
+      "title": "Identité de Marque & Design",
+      "desc": "Logos, visuels et identités numériques qui racontent votre histoire."
+    },
+    "opt": {
+      "title": "Optimisation Commerciale",
+      "desc": "Systèmes personnalisés et automatisation. Solutions sur mesure ou ERP (Odoo) alignés sur vos objectifs."
+    },
+    "mkt": {
+      "title": "Marketing & Croissance",
+      "desc": "Campagnes intelligentes, réseaux sociaux et référencement qui génèrent de la visibilité et des résultats."
+    },
+    "whatYouGet": "Ce que vous obtenez :"
+  },
+  "why": {
+    "title": "Pourquoi Nous Choisir",
+    "subtitle": "Partenaires de Votre Réussite",
+    "point1": "Agilité, rapidité et flexibilité.",
+    "point2": "Solutions sur mesure pour les startups et PME.",
+    "point3": "Forfaits abordables qui évoluent avec vous.",
+    "point4": "Perspective africaine avec des normes internationales.",
+    "partners": "Nous ne livrons pas que des projets — nous construisons des partenariats durables."
+  },
+  "portfolio": {
+    "title": "Notre Portfolio",
+    "subtitle": "Découvrez Nos Réalisations",
+    "viewAll": "Voir Tous les Projets",
+    "viewProject": "Voir le projet"
+  },
+  "cta": {
+    "banner": {
+      "title": "Prêt à donner vie à votre vision ?",
+      "btn": "Démarrer Votre Projet"
+    }
+  },
+  "contact": {
+    "title": "Contactez-Nous",
+    "subtitle": "Vous avez un projet en tête ou souhaitez discuter de potentiels partenariats ?",
+    "sub": "Parlons de votre projet",
+    "name": "Nom complet",
+    "namePlaceholder": "Comment devrions-nous vous appeler ?",
+    "email": "Adresse email",
+    "emailPlaceholder": "Où pouvons-nous vous joindre ? (ex: nom@exemple.com)",
+    "company": "Votre Organisation",
+    "companyPlaceholder": "L'entreprise formidable avec laquelle vous travaillez",
+    "service": "Comment pouvons-nous vous aider aujourd'hui ?",
+    "message": "Votre message",
+    "messagePlaceholder": "Nous sommes tout ouïe ! Partagez-nous vos idées, questions ou détails du projet...",
+    "send": "Envoyer le message",
+    "sending": "Envoi en cours...",
+    "success": "Merci pour votre message ! Nous vous recontacterons bientôt.",
+    "error": "Échec de l'envoi du message. Veuillez réessayer plus tard.",
+    "emailUs": "Écrivez-nous",
+    "callUs": "Appelez-nous",
+    "callUsCopy": "Disponible du lundi au vendredi de 9h à 18h",
+    "visitUs": "Venez nous voir",
+    "direct": "Contact direct",
+    "directCopy": "Vous préférez nous contacter directement ?",
+    "locations": "Nos bureaux",
+    "locationsCopy": "Nous travaillons avec des clients du monde entier. Nos principaux bureaux sont situés au Maroc.",
+    "newMessage": "Nouveau message depuis le site web",
+    "teaser": {
+      "title": "Contact",
+      "copy": "Parlons de votre prochaine grande idée.",
+      "btn": "Discutons-en"
+    }
+  },
+  "opt": {
+    "web": "Web",
+    "mobile": "Mobile",
+    "brand": "Branding",
+    "opt": "Optimisation",
+    "mkt": "Marketing",
+    "other": "Autre"
+  },
+  "footer": {
+    "copy": "Tous droits réservés.",
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d'Utilisation"
+  }
+}
