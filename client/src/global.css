@@ -65,8 +65,8 @@
   }
 
   html.is-light {
-    /* Enhanced light mode with warm, modern palette */
-    --background: 210 25% 97%; /* Softer warm white background */
+    /* Enhanced light mode with warm, sophisticated palette */
+    --background: 210 30% 96%; /* Warm light blue-gray background */
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%; /* Pure white cards with subtle shadows */
@@ -78,10 +78,10 @@
     --primary: 0 84% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 95%; /* Slightly more saturated secondary */
+    --secondary: 210 45% 94%; /* More saturated secondary */
     --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --muted: 210 30% 92%; /* Warmer muted background */
+    --muted: 210 35% 90%; /* Warmer muted background */
     --muted-foreground: 215.4 16.3% 44%;
 
     --accent: 25 95% 65%; /* Warm orange accent */
@@ -90,16 +90,18 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214 25% 88%; /* Softer borders */
-    --input: 214 25% 92%; /* Lighter input backgrounds */
+    --border: 214 30% 85%; /* More defined borders */
+    --input: 214 30% 90%; /* Warmer input backgrounds */
     --ring: 0 84% 60%;
 
     --radius: 0.75rem;
 
-    /* New gradient variables for backgrounds */
-    --gradient-primary: linear-gradient(135deg, hsl(210 40% 98%) 0%, hsl(220 30% 96%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(0 84% 60% / 0.05) 0%, hsl(25 95% 65% / 0.05) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(210 40% 98%) 0%, hsl(220 30% 96%) 50%, hsl(200 30% 94%) 100%);
+    /* Enhanced gradient variables for backgrounds */
+    --gradient-primary: linear-gradient(135deg, hsl(210 45% 97%) 0%, hsl(220 35% 94%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(0 84% 60% / 0.08) 0%, hsl(25 95% 65% / 0.08) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(210 45% 97%) 0%, hsl(220 35% 94%) 50%, hsl(200 35% 92%) 100%);
+    --gradient-warm: linear-gradient(135deg, hsl(25 95% 65% / 0.03) 0%, hsl(0 84% 60% / 0.05) 100%);
+    --gradient-cool: linear-gradient(135deg, hsl(210 45% 97%) 0%, hsl(200 40% 95%) 100%);
 
     --sidebar-background: 0 0% 99%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -107,7 +109,7 @@
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 4.8% 96.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 15% 90%;
+    --sidebar-border: 220 18% 88%;
     --sidebar-ring: 0 84% 60%;
   }
 }
@@ -349,27 +351,61 @@
     );
   }
   
-  /* Hide patterns in dark mode */
+  /* Hide patterns and backgrounds in dark mode */
   html:not(.is-light) .bg-pattern-dots,
   html:not(.is-light) .bg-pattern-grid,
-  html:not(.is-light) .bg-pattern-diagonal {
-    background-image: none;
+  html:not(.is-light) .bg-pattern-diagonal,
+  html:not(.is-light) .bg-mesh-gradient,
+  html:not(.is-light) .bg-warm-gradient,
+  html:not(.is-light) .bg-cool-gradient,
+  html:not(.is-light) .bg-texture-light,
+  html:not(.is-light) .bg-sophisticated {
+    background: transparent !important;
+    background-image: none !important;
   }
   
   .bg-mesh-gradient {
     background: 
-      radial-gradient(at 40% 20%, hsl(0 84% 60% / 0.08) 0px, transparent 50%),
-      radial-gradient(at 80% 0%, hsl(25 95% 65% / 0.06) 0px, transparent 50%),
-      radial-gradient(at 0% 50%, hsl(210 40% 98%) 0px, transparent 50%),
-      radial-gradient(at 80% 50%, hsl(220 30% 96%) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, hsl(200 30% 94%) 0px, transparent 50%),
-      radial-gradient(at 80% 100%, hsl(0 84% 60% / 0.05) 0px, transparent 50%);
+      radial-gradient(at 40% 20%, hsl(0 84% 60% / 0.12) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, hsl(25 95% 65% / 0.10) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, hsl(210 45% 97%) 0px, transparent 50%),
+      radial-gradient(at 80% 50%, hsl(220 35% 94%) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsl(200 35% 92%) 0px, transparent 50%),
+      radial-gradient(at 80% 100%, hsl(0 84% 60% / 0.08) 0px, transparent 50%);
+  }
+  
+  .bg-warm-gradient {
+    background: var(--gradient-warm);
+  }
+  
+  .bg-cool-gradient {
+    background: var(--gradient-cool);
+  }
+  
+  .bg-texture-light {
+    background-image: 
+      radial-gradient(circle at 25% 25%, hsl(0 84% 60% / 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, hsl(25 95% 65% / 0.04) 0%, transparent 50%),
+      linear-gradient(135deg, hsl(210 45% 97%) 0%, hsl(220 35% 94%) 100%);
+  }
+  
+  .bg-sophisticated {
+    background: 
+      linear-gradient(135deg, hsl(210 45% 97%) 0%, hsl(220 35% 94%) 50%, hsl(200 35% 92%) 100%),
+      radial-gradient(ellipse at top, hsl(0 84% 60% / 0.06), transparent),
+      radial-gradient(ellipse at bottom, hsl(25 95% 65% / 0.04), transparent);
   }
   
   .glass-effect {
     background: hsl(0 0% 100% / 0.8);
     backdrop-filter: blur(12px);
     border: 1px solid hsl(214 25% 88% / 0.5);
+  }
+  
+  /* Dark mode glass effect */
+  html:not(.is-light) .glass-effect {
+    background: hsl(0 0% 0% / 0.4);
+    border: 1px solid hsl(214 25% 20% / 0.5);
   }
   
   .card-elevated {
