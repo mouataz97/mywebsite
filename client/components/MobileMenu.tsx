@@ -2,7 +2,6 @@ import { createPortal } from 'react-dom';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n-new';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import { ThemeSwitch } from './ThemeSwitch';
 import { useTheme } from '@/hooks/use-theme';
 
 interface NavLink {
@@ -115,7 +114,6 @@ export function MobileMenu({ isOpen, onClose, navLinks, isArabic }: MobileMenuPr
           <div className="flex items-center justify-between p-4 border-b border-border/20">
             <div className="flex items-center gap-3">
               <span id="mobile-menu-title" className="text-lg font-semibold tracking-tight">Menu</span>
-              <ThemeSwitch />
             </div>
             <button
               type="button"

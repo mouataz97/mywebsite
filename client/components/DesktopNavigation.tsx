@@ -1,6 +1,5 @@
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import { ThemeSwitch } from './ThemeSwitch';
 
 interface NavLink {
   to: string;
@@ -48,7 +47,6 @@ export function DesktopNavigation({ navLinks, isArabic }: DesktopNavigationProps
       <div className="h-6 w-px bg-border/40 mx-3"></div>
       <div className="flex items-center gap-3 pl-2">
         <LanguageSwitcher />
-        <ThemeSwitch />
       </div>
     </nav>
   );

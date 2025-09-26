@@ -13,6 +13,7 @@ import { Modal } from '../components/ui/Modal';
 // App Components
 import { Header } from '../components/Header';
 import { ContactModal } from '../components/ContactModal';
+import { FloatingThemeToggle } from '../components/FloatingThemeToggle';
 import { I18nProvider, useI18n } from '../lib/i18n-new';
 import { ThemeProvider } from '../contexts/ThemeContext';
 
@@ -96,6 +97,10 @@ function AppContent({ children }: AppContentProps) {
         open={isContactModalOpen}
         onClose={handleContactModalClose}
       />
+      
+      {/* Floating Theme Toggle */}
+      <FloatingThemeToggle />
+      
       <Toaster position="top-center" />
     </div>
   );
