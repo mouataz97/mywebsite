@@ -13,7 +13,8 @@ import { Modal } from '../components/ui/Modal';
 // App Components
 import { Header } from '../components/Header';
 import { ContactModal } from '../components/ContactModal';
-import { I18nProvider, useI18n } from '../i18n.tsx';
+import { I18nProvider, useI18n } from '../lib/i18n-new';
+import { ThemeProvider } from '../contexts/ThemeContext';
 
 // Pages
 import Index from '../pages/Index';
@@ -127,16 +128,18 @@ function Router() {
 function App() {
   return (
     <div className="min-h-screen bg-background">
-      <QueryClientProvider client={queryClient}>
-        <I18nProvider>
-          <TooltipProvider>
-            <BrowserRouter>
-              <Router />
-            </BrowserRouter>
-            <Toaster position="top-center" />
-          </TooltipProvider>
-        </I18nProvider>
-      </QueryClientProvider>
+      <ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <I18nProvider>
+            <TooltipProvider>
+              <BrowserRouter>
+                <Router />
+              </BrowserRouter>
+              <Toaster position="top-center" />
+            </TooltipProvider>
+          </I18nProvider>
+        </QueryClientProvider>
+      </ThemeProvider>
     </div>
   );
 }

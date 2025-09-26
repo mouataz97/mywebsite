@@ -46,7 +46,7 @@ export function I18nProvider({
 
       // Replace placeholders like {{name}} with values from params
       return Object.entries(params).reduce(
-        (str, [k, v]) => str.replace(new RegExp(`{{${k}}}`, 'g'), String(v)),
+        (str: string, [k, v]) => str.replace(new RegExp(`{{${k}}}`, 'g'), String(v)),
         value
       );
     } catch (error) {

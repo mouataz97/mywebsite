@@ -1,7 +1,7 @@
-import { useI18n } from '@/i18n';
+import { useI18n } from '@/lib/i18n-new';
 
 export function LangSwitch() {
-  const { language, setLanguage } = useI18n();
+  const { locale, changeLanguage } = useI18n();
   
   const languages = [
     { code: 'en', label: 'EN' },
@@ -14,9 +14,9 @@ export function LangSwitch() {
       {languages.map((lang) => (
         <button
           key={lang.code}
-          onClick={() => setLanguage(lang.code)}
+          onClick={() => changeLanguage(lang.code as 'en' | 'fr' | 'ar')}
           className={`px-2 py-1 text-xs rounded-full transition-colors ${
-            language === lang.code 
+            locale === lang.code 
               ? 'bg-primary text-primary-foreground' 
               : 'text-muted-foreground hover:text-foreground'
           }`}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { useI18n } from '../src/i18n';
+import { useI18n } from '@/lib/i18n-new';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { ThemeSwitch } from './ThemeSwitch';
 
@@ -18,24 +18,34 @@ export function Header() {
   // Handle body scroll when mobile menu is open
   useEffect(() => {
     if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      // Store current scroll position
+      const scrollY = window.scrollY;
       document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-      document.body.style.top = `-${window.scrollY}px`;
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.overflow = 'hidden';
     } else {
+      // Restore scroll position
       const scrollY = document.body.style.top;
-      document.body.style.overflow = '';
       document.body.style.position = '';
-      document.body.style.width = '';
       document.body.style.top = '';
-      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.overflow = '';
+      
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
     }
     
     return () => {
-      document.body.style.overflow = '';
+      // Cleanup on unmount
       document.body.style.position = '';
-      document.body.style.width = '';
       document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.overflow = '';
     };
   }, [isMenuOpen]);
   
@@ -43,6 +53,33 @@ export function Header() {
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
+
+  // Handle escape key and outside clicks
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsMenuOpen(false);
+      }
+    };
+
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // Close if clicking on the backdrop (not the menu content)
+      if (target.closest('[role="dialog"]') && !target.closest('.menu-content')) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isMenuOpen]);
   
   // Add scroll effect for header
   useEffect(() => {
@@ -72,14 +109,14 @@ export function Header() {
         to={link.to}
         state={link.to === "/contact" ? { modal: true, backgroundLocation: location } : undefined}
         className={({ isActive }) =>
-          `px-4 py-3 rounded-md text-base transition-all duration-300 relative group ${
+          `transition-all duration-300 relative group ${
             isMobile 
-              ? 'flex items-center w-full' 
-              : 'inline-block'
+              ? 'flex items-center w-full px-3 py-3 rounded-lg text-base min-h-[48px] touch-manipulation' 
+              : 'inline-block px-4 py-3 rounded-md text-base'
           } ${
             isActive 
-              ? 'text-primary font-medium' 
-              : 'text-muted-foreground hover:text-primary hover:bg-accent/5'
+              ? 'text-primary font-medium bg-primary/10' 
+              : 'text-muted-foreground hover:text-primary hover:bg-accent/10'
           }`
         }
         end={link.to === "/"}
@@ -88,14 +125,23 @@ export function Header() {
         {({ isActive }) => (
           <>
             <span className="relative z-10">{link.label}</span>
-            <span className={`absolute bottom-0 left-0 w-0 h-full bg-accent/5 transition-all duration-300 group-hover:w-full ${
-              isActive ? 'w-full' : ''
-            }`}></span>
-            {!isMobile && (
-              <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-4/5 -translate-x-1/2"></span>
+            {isMobile && isActive && (
+              <span className="ml-auto">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="9,18 15,12 9,6"></polyline>
+                </svg>
+              </span>
             )}
-            {!isMobile && isActive && (
-              <span className="absolute bottom-0 left-1/2 w-4/5 h-0.5 bg-primary -translate-x-1/2"></span>
+            {!isMobile && (
+              <>
+                <span className={`absolute bottom-0 left-0 w-0 h-full bg-accent/5 transition-all duration-300 group-hover:w-full ${
+                  isActive ? 'w-full' : ''
+                }`}></span>
+                <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-4/5 -translate-x-1/2"></span>
+                {isActive && (
+                  <span className="absolute bottom-0 left-1/2 w-4/5 h-0.5 bg-primary -translate-x-1/2"></span>
+                )}
+              </>
             )}
           </>
         )}
@@ -137,7 +183,7 @@ export function Header() {
         {/* Mobile menu button */}
         <button
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-          className="md:hidden h-10 w-10 flex items-center justify-center rounded-full hover:bg-accent/10 hover:text-primary transition-colors duration-200"
+          className="md:hidden h-12 w-12 flex items-center justify-center rounded-full hover:bg-accent/10 hover:text-primary transition-colors duration-200 touch-manipulation active:scale-95"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? (
@@ -152,49 +198,66 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu backdrop */}
       <div 
-        className={`fixed inset-0 z-[9999] bg-background transition-all duration-300 ease-in-out ${
-          isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none hidden'
+        className={`fixed inset-0 z-[9999] bg-black/20 backdrop-blur-sm transition-all duration-300 ease-in-out ${
+          isMenuOpen 
+            ? 'opacity-100 visible' 
+            : 'opacity-0 invisible pointer-events-none'
         }`}
         role="dialog" 
         aria-modal="true"
         aria-hidden={!isMenuOpen}
+        onClick={() => setIsMenuOpen(false)}
       >
-        <div className="h-full w-full overflow-y-auto p-4">
-          {/* Close button */}
-          <div className="flex justify-end mb-6">
-            <button
-              onClick={() => setIsMenuOpen(false)}
-              className="p-2 text-foreground"
-              aria-label="Close menu"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
-          </div>
-            
-          {/* Mobile navigation */}
-          <nav className="space-y-4 mt-8">
-            {navLinks.map((link) => (
-              <div key={link.to}>
-                {renderNavLink(link, true)}
+        {/* Mobile menu panel */}
+        <div 
+          className={`fixed top-0 right-0 h-full w-1/2 min-w-[280px] bg-background border-l border-border/20 shadow-2xl transition-transform duration-300 ease-in-out menu-content ${
+            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+          onClick={(e) => e.stopPropagation()}
+        >
+            <div className="h-full overflow-y-auto">
+              {/* Header with close button */}
+              <div className="flex items-center justify-between p-4 border-b border-border/20">
+                <span className="text-lg font-semibold tracking-tight">Menu</span>
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="p-2 hover:bg-accent/10 rounded-full transition-colors"
+                  aria-label="Close menu"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
               </div>
-            ))}
-          </nav>
-          
-          {/* Mobile footer */}
-          <div className="mt-12 pt-8 border-t border-border/20">
-            <div className="flex items-center justify-center gap-6 mb-6">
-              <LanguageSwitcher />
-              <ThemeSwitch />
+                
+              {/* Mobile navigation */}
+              <nav className="p-4">
+                <div className="space-y-1">
+                  {navLinks.map((link) => (
+                    <div key={link.to}>
+                      {renderNavLink(link, true)}
+                    </div>
+                  ))}
+                </div>
+              </nav>
+              
+              {/* Mobile footer */}
+              <div className="p-4 mt-auto border-t border-border/20">
+                <div className="space-y-4">
+                  <div className="flex flex-col gap-3">
+                    <div className="text-sm font-medium text-muted-foreground">Language</div>
+                    <LanguageSwitcher />
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <div className="text-sm font-medium text-muted-foreground">Theme</div>
+                    <ThemeSwitch />
+                  </div>
+                </div>
+              </div>
             </div>
-            <p className="text-center text-sm text-muted-foreground">
-              © {new Date().getFullYear()} 300k Studio. All rights reserved.
-            </p>
-          </div>
         </div>
       </div>
     </header>
