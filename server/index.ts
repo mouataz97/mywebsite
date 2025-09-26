@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
+import { handleContact } from "./routes/contact";
 
 export function createServer() {
   const app = express();
@@ -11,6 +12,11 @@ export function createServer() {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
+  // Health check endpoint
+  app.get("/health", (_req, res) => {
+    res.json({ status: "ok", timestamp: new Date().toISOString() });
+  });
+
   // Example API routes
   app.get("/api/ping", (_req, res) => {
     const ping = process.env.PING_MESSAGE ?? "ping";
@@ -18,6 +24,8 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
+  
+  app.post("/api/contact", handleContact);
 
   return app;
 }

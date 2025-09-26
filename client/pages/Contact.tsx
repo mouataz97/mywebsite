@@ -38,25 +38,33 @@ export default function Contact() {
       const data = new FormData(form);
       const service = (data.get("service") as string) || t("opt.other");
       
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Prepare email
-      const subject = encodeURIComponent(`${t("contact.newMessage")} — ${service}`);
-      const body = encodeURIComponent(
-        `${t("contact.name")}: ${data.get("name")}\n` +
-        `${t("contact.email")}: ${data.get("email")}\n` +
-        `${data.get("company") ? `${t("contact.company")}: ${data.get("company")}\n` : ''}` +
-        `${t("contact.service")}: ${service}\n\n` +
-        `${t("contact.message")}:\n${data.get("message")}`
-      );
-      
-      // Open default email client
-      window.location.href = `mailto:aymane@razani.ma?subject=${subject}&body=${body}`;
-      
-      // Show success state
-      setSubmitSuccess(true);
-      form.reset();
+      // Prepare contact data
+      const contactData = {
+        name: data.get("name") as string,
+        email: data.get("email") as string,
+        subject: `${t("contact.newMessage")} — ${service}`,
+        message: `${t("contact.service")}: ${service}\n` +
+                `${data.get("company") ? `${t("contact.company")}: ${data.get("company")}\n` : ''}` +
+                `\n${data.get("message")}`
+      };
+
+      // Send to API endpoint
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contactData),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitSuccess(true);
+        form.reset();
+      } else {
+        setSubmitError(result.message || t("contact.submitError") || "An error occurred. Please try again.");
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
       setSubmitError(t("contact.submitError") || "An error occurred. Please try again.");
