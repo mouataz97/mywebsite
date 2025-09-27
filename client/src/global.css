@@ -65,52 +65,52 @@
   }
 
   html.is-light {
-    /* Enhanced light mode with warm, sophisticated palette */
-    --background: 210 30% 96%; /* Warm light blue-gray background */
-    --foreground: 222.2 84% 4.9%;
+    /* Light mode tuned toward soft neutral grays */
+    --background: 220 20% 95%; /* Gentle light gray backdrop */
+    --foreground: 222.2 40% 10%;
 
-    --card: 0 0% 100%; /* Pure white cards with subtle shadows */
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%; /* Clean white surfaces */
+    --card-foreground: 222.2 40% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 222.2 40% 10%;
 
-    --primary: 0 84% 60%;
+    --primary: 350 70% 56%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 45% 94%; /* More saturated secondary */
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 18% 90%; /* Neutral secondary surfaces */
+    --secondary-foreground: 222.2 40% 12%;
 
-    --muted: 210 35% 90%; /* Warmer muted background */
-    --muted-foreground: 215.4 16.3% 35%; /* Darker for better contrast */
+    --muted: 220 14% 88%; /* Soft gray panels */
+    --muted-foreground: 220 10% 32%; /* Comfortable contrast */
 
-    --accent: 25 95% 65%; /* Warm orange accent */
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 350 70% 60%; /* Retain warm accent with softer presence */
+    --accent-foreground: 222.2 40% 12%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214 30% 85%; /* More defined borders */
-    --input: 214 30% 90%; /* Warmer input backgrounds */
-    --ring: 0 84% 60%;
+    --border: 220 18% 82%; /* Subtle gray dividers */
+    --input: 220 16% 88%;
+    --ring: 350 70% 56%;
 
     --radius: 0.75rem;
 
-    /* Enhanced gradient variables for backgrounds */
-    --gradient-primary: linear-gradient(135deg, hsl(210 45% 97%) 0%, hsl(220 35% 94%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(0 84% 60% / 0.08) 0%, hsl(25 95% 65% / 0.08) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(210 45% 97%) 0%, hsl(220 35% 94%) 50%, hsl(200 35% 92%) 100%);
-    --gradient-warm: linear-gradient(135deg, hsl(25 95% 65% / 0.03) 0%, hsl(0 84% 60% / 0.05) 100%);
-    --gradient-cool: linear-gradient(135deg, hsl(210 45% 97%) 0%, hsl(200 40% 95%) 100%);
+    /* Updated gradients for a calmer gray ambiance */
+    --gradient-primary: linear-gradient(135deg, hsl(220 20% 97%) 0%, hsl(215 18% 93%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(350 70% 60% / 0.06) 0%, hsl(0 72% 55% / 0.06) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(220 20% 97%) 0%, hsl(215 18% 94%) 50%, hsl(210 16% 92%) 100%);
+    --gradient-warm: linear-gradient(135deg, hsl(350 70% 60% / 0.03) 0%, hsl(0 72% 55% / 0.04) 100%);
+    --gradient-cool: linear-gradient(135deg, hsl(220 20% 97%) 0%, hsl(210 16% 93%) 100%);
 
-    --sidebar-background: 0 0% 99%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 0 84% 60%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 220 10% 24%;
+    --sidebar-primary: 350 70% 56%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 4.8% 96.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 18% 88%;
-    --sidebar-ring: 0 84% 60%;
+    --sidebar-accent: 220 16% 92%;
+    --sidebar-accent-foreground: 220 12% 26%;
+    --sidebar-border: 220 18% 86%;
+    --sidebar-ring: 350 70% 56%;
   }
 }
 
@@ -333,15 +333,15 @@
   /* Light mode only patterns */
   html.is-light .bg-pattern-dots,
   .bg-pattern-dots {
-    background-image: radial-gradient(circle at 1px 1px, hsl(0 84% 60% / 0.08) 1px, transparent 0);
+    background-image: radial-gradient(circle at 1px 1px, hsl(220 10% 40% / 0.08) 1px, transparent 0);
     background-size: 20px 20px;
   }
   
   html.is-light .bg-pattern-grid,
   .bg-pattern-grid {
     background-image: 
-      linear-gradient(hsl(214 25% 88% / 0.3) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(214 25% 88% / 0.3) 1px, transparent 1px);
+      linear-gradient(hsl(220 16% 86% / 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(220 16% 86% / 0.3) 1px, transparent 1px);
     background-size: 24px 24px;
   }
   
@@ -351,8 +351,8 @@
       45deg,
       transparent,
       transparent 10px,
-      hsl(0 84% 60% / 0.03) 10px,
-      hsl(0 84% 60% / 0.03) 20px
+      hsl(350 70% 60% / 0.03) 10px,
+      hsl(350 70% 60% / 0.03) 20px
     );
   }
   
@@ -369,14 +369,12 @@
     background-image: none !important;
   }
   
-  .bg-mesh-gradient {
+  .bg-sophisticated {
     background: 
-      radial-gradient(at 40% 20%, hsl(0 84% 60% / 0.12) 0px, transparent 50%),
-      radial-gradient(at 80% 0%, hsl(25 95% 65% / 0.10) 0px, transparent 50%),
-      radial-gradient(at 0% 50%, hsl(210 45% 97%) 0px, transparent 50%),
-      radial-gradient(at 80% 50%, hsl(220 35% 94%) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, hsl(200 35% 92%) 0px, transparent 50%),
-      radial-gradient(at 80% 100%, hsl(0 84% 60% / 0.08) 0px, transparent 50%);
+      linear-gradient(135deg, hsl(220 20% 97%) 0%, hsl(215 18% 94%) 50%, hsl(210 16% 92%) 100%),
+      radial-gradient(at 20% 30%, hsl(350 70% 60% / 0.10) 0px, transparent 55%),
+      radial-gradient(at 80% 25%, hsl(220 12% 85% / 0.12) 0px, transparent 55%),
+      radial-gradient(at 50% 85%, hsl(350 70% 60% / 0.08) 0px, transparent 60%);
   }
   
   .bg-warm-gradient {
@@ -389,16 +387,9 @@
   
   .bg-texture-light {
     background-image: 
-      radial-gradient(circle at 25% 25%, hsl(0 84% 60% / 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, hsl(25 95% 65% / 0.04) 0%, transparent 50%),
-      linear-gradient(135deg, hsl(210 45% 97%) 0%, hsl(220 35% 94%) 100%);
-  }
-  
-  .bg-sophisticated {
-    background: 
-      linear-gradient(135deg, hsl(210 45% 97%) 0%, hsl(220 35% 94%) 50%, hsl(200 35% 92%) 100%),
-      radial-gradient(ellipse at top, hsl(0 84% 60% / 0.06), transparent),
-      radial-gradient(ellipse at bottom, hsl(25 95% 65% / 0.04), transparent);
+      radial-gradient(circle at 25% 25%, hsl(350 70% 60% / 0.04) 0%, transparent 55%),
+      radial-gradient(circle at 75% 75%, hsl(350 70% 60% / 0.03) 0%, transparent 55%),
+      linear-gradient(135deg, hsl(220 20% 97%) 0%, hsl(215 18% 94%) 100%);
   }
   
   .glass-effect {

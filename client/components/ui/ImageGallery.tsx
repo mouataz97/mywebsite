@@ -6,32 +6,49 @@ interface ImageGalleryProps {
     alt: string;
     width: number;
     height: number;
+    title?: string;
+    description?: string;
+    category?: string;
   }[];
   className?: string;
 }
 
 export function ImageGallery({ images, className }: ImageGalleryProps) {
   return (
-    <div className={cn("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6", className)}>
+    <div
+      className={cn(
+        "grid gap-6 sm:grid-cols-2 lg:grid-cols-3",
+        className
+      )}
+    >
       {images.map((image, index) => (
-        <div 
+        <article
           key={index}
-          className="group relative overflow-hidden rounded-xl aspect-[4/3] bg-muted/50 hover:bg-muted/30 transition-all duration-300"
+          className="group relative overflow-hidden rounded-3xl bg-card shadow-lg ring-1 ring-border/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
         >
-          <img
-            src={image.src}
-            alt={image.alt}
-            width={image.width}
-            height={image.height}
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-            <p className="text-white font-medium text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-              {image.alt}
+          <div className="relative aspect-[4/3] overflow-hidden">
+            <img
+              src={image.src}
+              alt={image.alt}
+              width={image.width}
+              height={image.height}
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
+          </div>
+          <div className="relative z-10 px-6 pb-6 pt-5 space-y-3">
+            <div className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary/90">
+              {image.category ?? `Project ${index + 1}`}
+            </div>
+            <h3 className="text-lg font-semibold text-foreground">
+              {image.title ?? image.alt}
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              {image.description ?? "Showcasing impactful digital experiences tailored to our clients' goals."}
             </p>
           </div>
-        </div>
+        </article>
       ))}
     </div>
   );
