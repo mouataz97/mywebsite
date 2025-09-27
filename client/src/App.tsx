@@ -1,6 +1,7 @@
-import { useState, useEffect, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import type { Location } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -8,7 +9,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { TooltipProvider } from '../components/ui/tooltip';
 import { AnimatedBackground } from '../components/ui/AnimatedBackground';
 import { PageTransition } from '../components/ui/PageTransition';
-import { Modal } from '../components/ui/Modal';
 
 // App Components
 import { Header } from '../components/Header';
@@ -20,6 +20,8 @@ import { ThemeProvider } from '../contexts/ThemeContext';
 // Pages
 import Index from '../pages/Index';
 import Services from '../pages/Services';
+import About from '../pages/About';
+import ContactPage from '../pages/Contact';
 
 // Styles
 import './global.css';
@@ -61,23 +63,6 @@ interface AppContentProps {
 }
 
 function AppContent({ children }: AppContentProps) {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-
-  // Handle contact modal state
-  useEffect(() => {
-    if (location.state?.modal) {
-      setIsContactModalOpen(true);
-    }
-  }, [location.state]);
-
-  const handleContactModalClose = () => {
-    setIsContactModalOpen(false);
-    // Always navigate to home page when closing the modal
-    navigate("/", { replace: true });
-  };
-
   return (
     <div className="flex min-h-screen flex-col relative bg-gradient-to-b from-background to-muted/10">
       <AnimatedBackground />
@@ -90,12 +75,6 @@ function AppContent({ children }: AppContentProps) {
         </PageTransition>
         <Footer />
       </div>
-
-      <ContactModal 
-        open={isContactModalOpen}
-        onClose={handleContactModalClose}
-      />
-      
       {/* Floating Theme Toggle */}
       <FloatingThemeToggle />
       
@@ -110,20 +89,26 @@ function Router() {
   const state = location.state as { backgroundLocation?: Location; modal?: boolean } | undefined;
   const backgroundLocation = state?.backgroundLocation;
 
+  const handleContactClose = () => {
+    if (backgroundLocation) {
+      navigate(-1);
+    } else {
+      navigate('/', { replace: true });
+    }
+  };
+
   return (
     <>
       <Routes location={backgroundLocation || location}>
         <Route path="/" element={<AppContent><Index /></AppContent>} />
         <Route path="/services" element={<AppContent><Services /></AppContent>} />
-        <Route path="/contact" element={<AppContent><div>Contact Page</div></AppContent>} />
+        <Route path="/about" element={<AppContent><About /></AppContent>} />
+        <Route path="/contact" element={<AppContent><ContactPage /></AppContent>} />
         <Route path="*" element={<AppContent><div>Not Found</div></AppContent>} />
       </Routes>
 
-      {/* Modal route overlay when a modal navigation occurs */}
-      {backgroundLocation && state?.modal && (
-        <Routes>
-          <Route path="/contact" element={<ContactModal open={true} onClose={() => navigate("/")} />} />
-        </Routes>
+      {state?.modal && (
+        <ContactModal open={true} onClose={handleContactClose} />
       )}
     </>
   );
@@ -149,4 +134,3 @@ function App() {
 }
 
 export default App;
-

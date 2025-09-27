@@ -140,6 +140,69 @@
       "btn": "Let's talk"
     }
   },
+  "about": {
+    "hero": {
+      "title": "About Us",
+      "subtitle": "We are 300k Studio — a digital agency dedicated to transforming ideas into powerful digital experiences that drive growth and success."
+    },
+    "story": {
+      "title": "Our Story",
+      "paragraph1": "Founded with a vision to bridge the gap between technology and business success, 300k Studio emerged from the belief that every business deserves access to world-class digital solutions.",
+      "paragraph2": "We started as a small team of passionate developers and designers who understood that technology should empower businesses, not complicate them. Today, we've grown into a full-service digital agency that serves clients across the globe.",
+      "paragraph3": "Our approach is simple: we listen, we understand, and we deliver solutions that not only meet your current needs but scale with your future ambitions.",
+      "tagline": "Digital Excellence"
+    },
+    "values": {
+      "title": "Our Values",
+      "subtitle": "The principles that guide everything we do",
+      "collaboration": {
+        "title": "Collaboration",
+        "desc": "We work closely with our clients as partners, ensuring every project reflects their vision and goals."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "desc": "We strive for perfection in every line of code, every design element, and every client interaction."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "desc": "We stay ahead of technology trends to deliver cutting-edge solutions that give you a competitive edge."
+      },
+      "quality": {
+        "title": "Quality",
+        "desc": "We never compromise on quality, ensuring every deliverable meets the highest standards of performance and design."
+      }
+    },
+    "team": {
+      "title": "Meet Our Team",
+      "subtitle": "The talented individuals behind 300k Studio",
+      "founder": {
+        "name": "El Mouataz Billah Fachatti",
+        "role": "Programmer & SEO Specialist",
+        "desc": "Blending technical mastery with growth-focused SEO strategies to deliver digital products that perform and scale."
+      },
+      "manager": {
+        "name": "Ayman",
+        "role": "Operations Manager",
+        "desc": "Ensures every project runs smoothly by aligning teams, timelines, and client goals with precision."
+      },
+      "designer": {
+        "name": "Hitam Sourih",
+        "role": "Web Designer",
+        "desc": "Crafts visually compelling, user-centred interfaces that translate brand vision into seamless digital experiences."
+      },
+      "lead": {
+        "name": "Development Team",
+        "role": "Technical Specialists",
+        "desc": "A diverse group of experts in web development, mobile apps, UI/UX design, and digital marketing."
+      }
+    },
+    "cta": {
+      "title": "Ready to Start Your Project?",
+      "subtitle": "Let's discuss how we can help transform your ideas into reality.",
+      "primary": "Get in Touch",
+      "secondary": "View Our Services"
+    }
+  },
   "footer": {
     "copy": "All rights reserved.",
     "privacy": "Privacy Policy",

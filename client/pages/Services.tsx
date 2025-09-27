@@ -149,7 +149,9 @@ export default function Services() {
           </div>
           <div className="flex gap-3">
             <Button asChild>
-              <Link to="/contact">{t("services.finalBtn")}</Link>
+              <Link to="/contact" state={{ modal: true, backgroundLocation: location }}>
+                {t("services.finalBtn")}
+              </Link>
             </Button>
           </div>
         </div>
