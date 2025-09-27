@@ -27,7 +27,7 @@ export function HeroSection({ isArabic }: HeroSectionProps) {
       
       <div className="container relative z-10">
         <div className={`${isArabic ? 'max-w-6xl' : 'max-w-4xl'} mx-auto text-center`} dir="auto">
-          <span className={`inline-flex items-center rounded-full bg-primary/10 text-xs font-medium leading-5 text-primary ring-1 ring-inset ring-primary/20 mb-6 ${isArabic ? 'px-4 py-2' : 'px-3 py-1'}`}>
+          <span className={`inline-flex items-center rounded-full bg-primary/15 text-sm font-bold leading-6 text-primary ring-2 ring-inset ring-primary/30 mb-8 shadow-lg ${isArabic ? 'px-6 py-3 text-base' : 'px-5 py-2'}`}>
             {t("home.badge")}
           </span>
           <h1 className={`font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70 ${isArabic ? 'text-3xl md:text-5xl lg:text-6xl leading-tight px-4 py-6 md:px-8 md:py-8' : 'text-4xl md:text-6xl lg:text-7xl'}`}>
