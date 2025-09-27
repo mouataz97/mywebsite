@@ -22,6 +22,7 @@ import Index from '../pages/Index';
 import Services from '../pages/Services';
 import About from '../pages/About';
 import ContactPage from '../pages/Contact';
+import Portfolio from '../pages/Portfolio';
 
 // Styles
 import './global.css';
@@ -104,6 +105,7 @@ function Router() {
         <Route path="/services" element={<AppContent><Services /></AppContent>} />
         <Route path="/about" element={<AppContent><About /></AppContent>} />
         <Route path="/contact" element={<AppContent><ContactPage /></AppContent>} />
+        <Route path="/portfolio" element={<AppContent><Portfolio /></AppContent>} />
         <Route path="*" element={<AppContent><div>Not Found</div></AppContent>} />
       </Routes>
 
