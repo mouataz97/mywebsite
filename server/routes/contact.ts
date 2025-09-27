@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import { ContactRequest, ContactResponse } from "@shared/api";
 import { z } from "zod";
+import { emailService } from "../services/emailService";
 
 // Validation schema using Zod
 const contactSchema = z.object({
@@ -13,7 +14,7 @@ const contactSchema = z.object({
 export const handleContact: RequestHandler = async (req, res) => {
   try {
     // Validate request body
-    const validatedData = contactSchema.parse(req.body);
+    const validatedData = contactSchema.parse(req.body) as ContactRequest;
     
     // Here you would typically:
     // 1. Save to database
@@ -23,8 +24,8 @@ export const handleContact: RequestHandler = async (req, res) => {
     // For demo purposes, we'll simulate processing
     const contactId = `contact_${Date.now()}`;
     
-    // Simulate email sending (replace with actual email service)
-    await simulateEmailSending(validatedData);
+    // Send actual email using email service
+    await emailService.sendContactEmail(validatedData);
     
     const response: ContactResponse = {
       success: true,
@@ -53,20 +54,3 @@ export const handleContact: RequestHandler = async (req, res) => {
   }
 };
 
-// Simulate email sending - replace with actual email service
-async function simulateEmailSending(data: ContactRequest): Promise<void> {
-  // In a real application, you would use services like:
-  // - Nodemailer with SMTP
-  // - SendGrid
-  // - AWS SES
-  // - Mailgun
-  // - Resend
-  
-  console.log("📧 Simulating email send:");
-  console.log(`From: ${data.name} <${data.email}>`);
-  console.log(`Subject: ${data.subject}`);
-  console.log(`Message: ${data.message}`);
-  
-  // Simulate async operation
-  await new Promise(resolve => setTimeout(resolve, 100));
-}

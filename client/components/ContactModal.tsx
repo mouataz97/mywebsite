@@ -12,6 +12,16 @@ export function ContactModal({ open, onClose }: ContactModalProps): JSX.Element 
   const navigate = useNavigate();
   const location = useLocation();
 
+  const handleClose = () => {
+    // Always navigate to home page when closing the modal
+    navigate("/", { replace: true });
+    
+    // Call the onClose callback if provided (for cleanup)
+    if (onClose) {
+      onClose();
+    }
+  };
+
   // Handle escape key press
   useEffect(() => {
     if (!open) return;
@@ -27,7 +37,7 @@ export function ContactModal({ open, onClose }: ContactModalProps): JSX.Element 
     return () => {
       window.removeEventListener('keydown', handleEscape);
     };
-  }, [open]);
+  }, [open, handleClose]);
   
   // Handle browser back button
   useEffect(() => {
@@ -46,20 +56,7 @@ export function ContactModal({ open, onClose }: ContactModalProps): JSX.Element 
         window.history.back();
       }
     };
-  }, [open]);
-
-  const handleClose = () => {
-    if (onClose) {
-      onClose();
-    } else {
-      // If there is a background page in history, go back, otherwise go home
-      if (window.history.length > 1 && location.state) {
-        navigate(-1);
-      } else {
-        navigate("/", { replace: true });
-      }
-    }
-  };
+  }, [open, handleClose]);
 
   return (
     <Modal open={open} onClose={handleClose} ariaLabel="Contact dialog" className="max-w-4xl">

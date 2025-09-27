@@ -52,7 +52,7 @@ export function Modal({
     >
       {/* Backdrop: darker in light mode, lighter in dark mode */}
       <div
-        className="absolute inset-0 transition-opacity"
+        className="absolute inset-0 transition-opacity cursor-pointer"
         // When html has class is-light => use darker overlay; otherwise lighter overlay
         style={{
           background: document.documentElement.classList.contains("is-light")
@@ -60,7 +60,13 @@ export function Modal({
             : "rgba(255,255,255,0.10)",
           backdropFilter: "blur(2px)",
         }}
-        onClick={onClose}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (onClose) {
+            onClose();
+          }
+        }}
       />
 
       {/* Content */}
@@ -69,15 +75,28 @@ export function Modal({
           "relative max-h-[85vh] w-full max-w-2xl overflow-auto rounded-xl border border-border/60 bg-card shadow-xl " +
           className
         }
+        onClick={(e) => {
+          // Prevent modal from closing when clicking inside the content
+          e.stopPropagation();
+        }}
       >
         {/* Close button */}
-        <button
-          aria-label="Close"
-          className="absolute right-3 top-3 h-8 w-8 inline-flex items-center justify-center rounded-md hover:bg-accent/10"
-          onClick={onClose}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </button>
+        {onClose && (
+          <button
+            aria-label="Close"
+            className="absolute right-3 top-3 z-10 h-8 w-8 inline-flex items-center justify-center rounded-md bg-background/80 hover:bg-accent/20 border border-border/40 shadow-sm transition-colors"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onClose();
+            }}
+            type="button"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
+              <path d="M18 6 6 18M6 6l12 12"/>
+            </svg>
+          </button>
+        )}
         {children}
       </div>
     </div>

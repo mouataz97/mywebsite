@@ -18,7 +18,7 @@ export function FeatureCard({ icon: Icon, title, description }: FeatureCardProps
           <Icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
         </div>
         <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors duration-300">{title}</h3>
-        <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
+        <p className="text-foreground/70 dark:text-muted-foreground text-sm leading-relaxed">{description}</p>
       </div>
       
       {/* Shimmer effect on hover - different for light/dark */}

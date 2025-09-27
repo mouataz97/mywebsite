@@ -52,7 +52,7 @@ export function FeaturesSection() {
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
             {t('services.title')}
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="mt-4 text-lg text-foreground/75 dark:text-muted-foreground">
             {t('services.subtitle')}
           </p>
         </div>

@@ -82,7 +82,7 @@
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 35% 90%; /* Warmer muted background */
-    --muted-foreground: 215.4 16.3% 44%;
+    --muted-foreground: 215.4 16.3% 35%; /* Darker for better contrast */
 
     --accent: 25 95% 65%; /* Warm orange accent */
     --accent-foreground: 222.2 47.4% 11.2%;
@@ -236,12 +236,17 @@
   
   p {
     font-size: 1rem; /* 16px */
-    color: hsl(var(--muted-foreground));
+    color: hsl(var(--foreground) / 0.8);
     line-height: 1.75;
     margin-bottom: 1.5em;
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
+  }
+  
+  /* Dark mode uses muted-foreground for paragraphs */
+  html:not(.is-light) p {
+    color: hsl(var(--muted-foreground));
   }
 }
 
@@ -457,4 +462,25 @@
   100% {
     background-position: 200% 0;
   }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced animations for light mode */
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }

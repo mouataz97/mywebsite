@@ -74,10 +74,8 @@ function AppContent({ children }: AppContentProps) {
 
   const handleContactModalClose = () => {
     setIsContactModalOpen(false);
-    // Remove the modal state from history
-    if (location.state?.modal) {
-      navigate(-1);
-    }
+    // Always navigate to home page when closing the modal
+    navigate("/", { replace: true });
   };
 
   return (
@@ -108,6 +106,7 @@ function AppContent({ children }: AppContentProps) {
 
 function Router() {
   const location = useLocation();
+  const navigate = useNavigate();
   const state = location.state as { backgroundLocation?: Location; modal?: boolean } | undefined;
   const backgroundLocation = state?.backgroundLocation;
 
@@ -123,7 +122,7 @@ function Router() {
       {/* Modal route overlay when a modal navigation occurs */}
       {backgroundLocation && state?.modal && (
         <Routes>
-          <Route path="/contact" element={<ContactModal open={true} onClose={() => window.history.back()} />} />
+          <Route path="/contact" element={<ContactModal open={true} onClose={() => navigate("/")} />} />
         </Routes>
       )}
     </>

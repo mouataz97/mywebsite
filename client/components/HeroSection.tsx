@@ -33,7 +33,7 @@ export function HeroSection({ isArabic }: HeroSectionProps) {
           <h1 className={`font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70 ${isArabic ? 'text-3xl md:text-5xl lg:text-6xl leading-tight px-4 py-6 md:px-8 md:py-8' : 'text-4xl md:text-6xl lg:text-7xl'}`}>
             {t("home.title")}
           </h1>
-          <p className={`mt-6 text-muted-foreground mx-auto ${isArabic ? 'text-xl md:text-2xl max-w-4xl leading-relaxed' : 'text-lg md:text-xl max-w-2xl'}`}>
+          <p className={`mt-6 text-foreground/80 dark:text-muted-foreground mx-auto ${isArabic ? 'text-xl md:text-2xl max-w-4xl leading-relaxed' : 'text-lg md:text-xl max-w-2xl'}`}>
             {t("home.sub")}
           </p>
 
@@ -44,7 +44,7 @@ export function HeroSection({ isArabic }: HeroSectionProps) {
                 <span className={`opacity-70 group-hover:translate-x-1 transition-transform ${isArabic ? 'mr-2' : 'ml-2'}`}>→</span>
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className={`text-base ${isArabic ? 'h-14 px-12' : 'h-12 px-8'}`}>
+            <Button asChild variant="outline" size="lg" className={`text-base border-2 border-foreground/20 text-foreground hover:bg-foreground hover:text-background dark:border-border dark:text-foreground dark:hover:bg-foreground dark:hover:text-background ${isArabic ? 'h-14 px-12' : 'h-12 px-8'}`}>
               <Link to="/services">
                 {t("home.ctaSecondary")}
               </Link>
